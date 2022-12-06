@@ -1,16 +1,119 @@
-<h1> hello world of angular {{title}}<h1>
-  <h2 class="h1">app-login</h2>
-  <app-login></app-login>
-  <app-login2></app-login2>
-  <button (click)="getName('animesh')">Submit</button>
-  <input type="text" placeholder="keyup" #box (keyup)="getData(box.value)"  />
-  <input type="text" placeholder="keyup" #tox (focus)="getData1(tox.value)"  />
-  <br />
-  <input tyep="text" #box1  placeholder="namePlaceholder"  />
-  <br />  
-  <button (click)="getNameP(box1.placeholder)">GetName</button>  <!-- box1.value for value of the input-->
-  <p>{{displayVal}}<p>
-    <button (click)="counter('add')">+</button>
-      <button (click)="counter('subtract')">-</button>
-        <p>{{number}}</p>
-  
+<app-header></app-header>
+<h1>hello world of angular {{ title }}</h1>
+<h2 class="h1">app-login</h2>
+<app-login></app-login>
+<app-login2></app-login2>
+<button (click)="getName('animesh')">Submit</button>
+<input type="text" placeholder="keyup" #box (keyup)="getData(box.value)" />
+<input type="text" placeholder="keyup" #tox (focus)="getData1(tox.value)" />
+<br />
+<input type="text" #box1 placeholder="namePlaceholder" />
+<br />
+<button (click)="getNameP(box1.placeholder)">GetName</button>
+<!-- box1.value for value of the input-->
+<p>{{ displayVal }}</p>
+<p>
+  <button (click)="counter('add')">+</button>
+  <button (click)="counter('subtract')">-</button>
+</p>
+<p>{{ number }}</p>
+<input value="{{ title }}" type="text" [placeholder]="disable" />
+<!--Interpolation-->
+<input [value]="title" type="text" placeholder="{{ disable }}" />
+<!--Property-Binding-->
+<h1 *ngIf="show; then IfBlock; else elseBlock"></h1>
+<ng-template #IfBlock> code step by step </ng-template>
+<ng-template #elseBlock> else block </ng-template>
+<ng-template *ngIf="color === 'red'">
+  <h1 style="color: #ff0000">I am red</h1>
+</ng-template>
+
+<div [ngSwitch]="color">
+  <h1 style="color: red" *ngSwitchCase="'red'">I am red switch</h1>
+  <h1 style="color: green" *ngSwitchCase="'green'">I am green switch</h1>
+  <h1 style="color: orange" *ngSwitchDefault>I am default switch</h1>
+</div>
+<h1 *ngFor="let item of users">Name is :{{ item }}</h1>
+<h1 *ngFor="let item of userDetails">
+  Profile : id:{{ item.id }} Phone:{{ item.phone }} Email:{{ item.email }}
+</h1>
+<ul *ngFor="let i of userDetails">
+  <li>{{ i.name }}</li>
+  <li>{{ i.phone }}</li>
+  <li>Social Accounts</li>
+  <ul *ngFor="let accounts of i.socialaccount">
+    <li>{{ accounts }}</li>
+  </ul>
+</ul>
+<h1 [style.color]="color1">Hello color {{ color1 }}</h1>
+<button (click)="updateColor(color1)">Change Color</button>
+
+<form #BasicForm="ngForm" (ngSubmit)="getFormData(BasicForm.value)">
+  <input type="text" ngModel placeholder="Enter your name" name="user" />
+  <br /><br />
+  <input type="email" ngModel placeholder="Enter your email" name="email" />
+  <br /><br />
+  <input
+    type="password"
+    ngModel
+    placeholder="Enter your password"
+    name="password"
+  />
+  <br /><br />
+  <button>Register</button>
+</form>
+<ul>
+  <li>{{ userData.email }}</li>
+  <li>{{ userData.user }}</li>
+  <li>{{ userData.password }}</li>
+</ul>
+<button (click)="toggle()">Toggle</button>
+<h1 *ngIf="display">Heading Tag toogle</h1>
+<ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
+  <ngb-panel title="Simple">
+    <ng-template ngbPanelContent>
+      Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry
+      richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard
+      dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf
+      moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla
+      assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore
+      wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur
+      butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim
+      aesthetic synth nesciunt you probably haven't heard of them accusamus
+      labore sustainable VHS.
+    </ng-template>
+  </ngb-panel>
+</ngb-accordion>
+
+<div class="example-button-row">
+  <button mat-stroked-button>Basic</button>
+  <button mat-stroked-button color="primary">Primary</button>
+  <button mat-stroked-button color="accent">Accent</button>
+  <button mat-stroked-button color="warn">Warn</button>
+  <button mat-stroked-button disabled>Disabled</button>
+  <a mat-stroked-button href="https://www.google.com/" target="_blank">Link</a>
+</div>
+<mat-slider>
+  <input matSliderThumb />
+</mat-slider>
+<div class="demo-section">
+  <button
+    mat-raised-button
+    color="primary"
+    matBadge="8"
+    matBadgePosition="before"
+    matBadgeColor="accent"
+  >
+    Action
+  </button>
+</div>
+<input type="text" placeholder="Enter new Task" #task />
+<br /><br />
+<button (click)="addTask(task.value)">Add Task</button>
+<ul *ngFor="let item of list">
+  <li>{{ item.name }} <button (click)="removeTask(item.id)">Remove</button></li>
+</ul>
+<app-child [item]="data"></app-child>
+<button (click)="updateChild()">update Child Component</button>
+<!--Parent to child component data transfer-->
+
